@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LarDoce Imóveis — Encontre o imóvel dos seus sonhos</title>
+  <meta name="description" content="Casas, apartamentos e imóveis para comprar com segurança e atendimento personalizado." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f1f4d'/%3E%3Cpath d='M16 5 5 16h4v10h6v-6h2v6h6V16h4L16 5Z' fill='%23f59e0b'/%3E%3C/svg%3E" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#eef6ff', 100: '#d9eaff', 500: '#2563eb', 600: '#1d4ed8', 700: '#1e40af', 900: '#0f1f4d' },
+            accent: { 500: '#f59e0b', 600: '#d97706' }
+          },
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .hero-bg { background-image: linear-gradient(to bottom, rgba(15,31,77,.75), rgba(15,31,77,.55)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; }
+    .card-img { transition: transform .5s ease; }
+    .card:hover .card-img { transform: scale(1.06); }
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased">
+
+  <!-- ============ HEADER ============ -->
+  <header id="header" class="fixed top-0 inset-x-0 z-50 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#inicio" class="flex items-center gap-2 text-white font-extrabold text-xl">
+        <svg class="w-8 h-8 text-accent-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>
+        LarDoce<span class="text-accent-500">Imóveis</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-white">
+        <a href="#inicio" class="hover:text-accent-500 transition">Início</a>
+        <a href="#destaques" class="hover:text-accent-500 transition">Destaques</a>
+        <a href="#contato" class="hover:text-accent-500 transition">Fale conosco</a>
+        <a href="#rodape" class="hover:text-accent-500 transition">Contato</a>
+        <a href="#contato" class="bg-accent-500 hover:bg-accent-600 text-white px-5 py-2 rounded-full transition">Quero ser atendido</a>
+      </nav>
+
+      <button id="menu-btn" aria-label="Abrir menu" class="md:hidden text-white p-2">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden bg-brand-900 text-white px-4 pb-4 space-y-1">
+      <a href="#inicio" class="block py-2">Início</a>
+      <a href="#destaques" class="block py-2">Destaques</a>
+      <a href="#contato" class="block py-2">Fale conosco</a>
+      <a href="#rodape" class="block py-2">Contato</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section id="inicio" class="hero-bg min-h-screen flex items-center pt-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16">
+        <div class="max-w-3xl">
+          <span class="inline-block bg-white/15 backdrop-blur text-white text-xs font-semibold tracking-wider uppercase px-4 py-1.5 rounded-full mb-5">+ de 1.200 imóveis vendidos</span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+            Encontre o lugar perfeito para <span class="text-accent-500">chamar de lar</span>
+          </h1>
+          <p class="mt-5 text-lg text-slate-200 max-w-2xl">Casas, apartamentos e coberturas selecionados, com assessoria completa do primeiro contato até a entrega das chaves.</p>
+        </div>
+
+        <!-- Busca rápida -->
+        <form id="search-form" class="mt-10 bg-white rounded-2xl shadow-2xl p-4 sm:p-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5 items-end">
+          <div>
+            <label for="s-tipo" class="block text-xs font-semibold text-slate-500 mb-1">Tipo</label>
+            <select id="s-tipo" class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+              <option value="">Todos</option>
+              <option value="Casa">Casa</option>
+              <option value="Apartamento">Apartamento</option>
+              <option value="Cobertura">Cobertura</option>
+              <option value="Terreno">Terreno</option>
+            </select>
+          </div>
+          <div>
+            <label for="s-cidade" class="block text-xs font-semibold text-slate-500 mb-1">Cidade</label>
+            <select id="s-cidade" class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+              <option value="">Todas</option>
+            </select>
+          </div>
+          <div>
+            <label for="s-quartos" class="block text-xs font-semibold text-slate-500 mb-1">Quartos (mín.)</label>
+            <select id="s-quartos" class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+              <option value="0">Qualquer</option>
+              <option value="1">1+</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+            </select>
+          </div>
+          <div>
+            <label for="s-preco" class="block text-xs font-semibold text-slate-500 mb-1">Preço máximo</label>
+            <select id="s-preco" class="w-full rounded-lg border border-slate-300 px-3 py-3 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+              <option value="0">Sem limite</option>
+              <option value="300000">Até R$ 300 mil</option>
+              <option value="600000">Até R$ 600 mil</option>
+              <option value="1000000">Até R$ 1 milhão</option>
+              <option value="2000000">Até R$ 2 milhões</option>
+            </select>
+          </div>
+          <button type="submit" class="bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-lg px-6 py-3 transition flex items-center justify-center gap-2 sm:col-span-2 lg:col-span-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="m21 21-4.3-4.3"/></svg>
+            Buscar
+          </button>
+        </form>
+
+        <!-- Números -->
+        <dl class="mt-12 grid grid-cols-3 gap-4 max-w-xl text-white">
+          <div><dt class="text-xs uppercase text-slate-300">Imóveis</dt><dd class="text-2xl sm:text-3xl font-extrabold">350+</dd></div>
+          <div><dt class="text-xs uppercase text-slate-300">Clientes felizes</dt><dd class="text-2xl sm:text-3xl font-extrabold">1.200</dd></div>
+          <div><dt class="text-xs uppercase text-slate-300">Anos de mercado</dt><dd class="text-2xl sm:text-3xl font-extrabold">15</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ IMÓVEIS EM DESTAQUE ============ -->
+    <section id="destaques" class="py-20 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12 fade-in">
+          <span class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Oportunidades</span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">Imóveis em destaque</h2>
+          <p class="mt-3 text-slate-600">Uma seleção especial de imóveis com ótima localização, infraestrutura e custo-benefício.</p>
+        </div>
+
+        <div id="grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+        <div id="empty" class="hidden text-center py-16">
+          <p class="text-lg font-semibold text-slate-700">Nenhum imóvel encontrado com esses filtros.</p>
+          <button id="clear-filters" class="mt-4 text-brand-600 font-semibold underline">Limpar filtros</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CAPTURA DE LEADS ============ -->
+    <section id="contato" class="bg-brand-900 py-20 sm:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+        <div class="text-white fade-in">
+          <span class="text-accent-500 font-semibold text-sm uppercase tracking-wider">Atendimento personalizado</span>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold leading-tight">Receba as melhores opções direto no seu WhatsApp</h2>
+          <p class="mt-4 text-slate-300">Deixe seus dados e um corretor especialista entrará em contato em até 1 hora útil, sem compromisso.</p>
+          <ul class="mt-6 space-y-3 text-slate-200">
+            <li class="flex items-center gap-3"><span class="text-accent-500">✔</span> Avaliação gratuita do seu perfil</li>
+            <li class="flex items-center gap-3"><span class="text-accent-500">✔</span> Ajuda com financiamento e documentação</li>
+            <li class="flex items-center gap-3"><span class="text-accent-500">✔</span> Visitas agendadas no melhor horário para você</li>
+          </ul>
+        </div>
+
+        <form id="lead-form" novalidate class="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 space-y-5 fade-in">
+          <h3 class="text-xl font-bold text-slate-900">Fale com um corretor</h3>
+
+          <div>
+            <label for="nome" class="block text-sm font-medium text-slate-700 mb-1">Nome completo</label>
+            <input id="nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome" class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+            <p class="err hidden text-xs text-red-600 mt-1">Informe seu nome (mínimo 3 caracteres).</p>
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">E-mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="voce@email.com" class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+            <p class="err hidden text-xs text-red-600 mt-1">Informe um e-mail válido.</p>
+          </div>
+
+          <div>
+            <label for="telefone" class="block text-sm font-medium text-slate-700 mb-1">Telefone / WhatsApp</label>
+            <input id="telefone" name="telefone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(11) 91234-5678" maxlength="15" class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-brand-500 focus:outline-none" />
+            <p class="err hidden text-xs text-red-600 mt-1">Informe um telefone válido com DDD.</p>
+          </div>
+
+          <button type="submit" class="w-full bg-accent-500 hover:bg-accent-600 text-white font-bold rounded-lg py-3.5 transition">Quero ser contatado</button>
+          <p class="text-xs text-slate-500 text-center">Seus dados estão seguros e não serão compartilhados.</p>
+          <div id="form-success" class="hidden rounded-lg bg-green-50 border border-green-200 text-green-800 text-sm p-4" role="status"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="rodape" class="bg-slate-900 text-slate-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <a href="#inicio" class="flex items-center gap-2 text-white font-extrabold text-xl">
+          <svg class="w-7 h-7 text-accent-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>
+          LarDoce<span class="text-accent-500">Imóveis</span>
+        </a>
+        <p class="mt-4 text-sm">Transformando o sonho da casa própria em realidade há mais de 15 anos.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-3">Navegação</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#inicio" class="hover:text-white">Início</a></li>
+          <li><a href="#destaques" class="hover:text-white">Imóveis em destaque</a></li>
+          <li><a href="#contato" class="hover:text-white">Fale conosco</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-3">Contato</h4>
+        <ul class="space-y-2 text-sm">
+          <li>📍 Av. Paulista, 1000 — São Paulo/SP</li>
+          <li>📞 (11) 4002-8922</li>
+          <li>💬 (11) 91234-5678</li>
+          <li>✉️ contato@lardoceimoveis.com.br</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-3">Horário de atendimento</h4>
+        <ul class="space-y-2 text-sm">
+          <li>Seg. a Sex.: 9h às 18h</li>
+          <li>Sábado: 9h às 13h</li>
+          <li class="pt-2 text-xs text-slate-400">CRECI 00000-J</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 py-5 text-center text-xs text-slate-500">
+      © <span id="year"></span> LarDoce Imóveis. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <!-- ============ SCRIPT ============ -->
+  <script>
+    // ---------- Dados ----------
+    const img = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=900&q=80`;
+    const FALLBACK = 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=900&q=80';
+
+    const imoveis = [
+      { id: 1, titulo: 'Casa moderna com piscina', tipo: 'Casa', cidade: 'São Paulo', bairro: 'Alto de Pinheiros', preco: 1850000, area: 280, quartos: 4, banheiros: 4, vagas: 3, foto: img('photo-1564013799919-ab600027ffc6'), tag: 'Destaque' },
+      { id: 2, titulo: 'Apartamento garden luxuoso', tipo: 'Apartamento', cidade: 'São Paulo', bairro: 'Vila Mariana', preco: 780000, area: 95, quartos: 3, banheiros: 2, vagas: 2, foto: img('photo-1522708323590-d24dbb6b0267'), tag: 'Novo' },
+      { id: 3, titulo: 'Cobertura duplex com vista', tipo: 'Cobertura', cidade: 'Rio de Janeiro', bairro: 'Barra da Tijuca', preco: 1990000, area: 210, quartos: 4, banheiros: 5, vagas: 3, foto: img('photo-1512917774080-9991f1c4c750'), tag: 'Exclusivo' },
+      { id: 4, titulo: 'Casa em condomínio fechado', tipo: 'Casa', cidade: 'Campinas', bairro: 'Alphaville', preco: 1250000, area: 240, quartos: 3, banheiros: 3, vagas: 2, foto: img('photo-1568605114967-8130f3a36994'), tag: 'Destaque' },
+      { id: 5, titulo: 'Apartamento compacto e moderno', tipo: 'Apartamento', cidade: 'Curitiba', bairro: 'Batel', preco: 420000, area: 52, quartos: 1, banheiros: 1, vagas: 1, foto: img('photo-1502672260266-1c1ef2d93688'), tag: 'Oportunidade' },
+      { id: 6, titulo: 'Sobrado aconchegante', tipo: 'Casa', cidade: 'Curitiba', bairro: 'Santa Felicidade', preco: 560000, area: 150, quartos: 3, banheiros: 2, vagas: 2, foto: img('photo-1570129477492-45c003edd2be'), tag: '' },
+      { id: 7, titulo: 'Apartamento 2 quartos perto do metrô', tipo: 'Apartamento', cidade: 'São Paulo', bairro: 'Tatuapé', preco: 295000, area: 58, quartos: 2, banheiros: 1, vagas: 1, foto: img('photo-1493809842364-78817add7ffb'), tag: 'Oportunidade' },
+      { id: 8, titulo: 'Mansão com área de lazer completa', tipo: 'Casa', cidade: 'Rio de Janeiro', bairro: 'São Conrado', preco: 1980000, area: 450, quartos: 5, banheiros: 6, vagas: 4, foto: img('photo-1613490493576-7fde63acd811'), tag: 'Exclusivo' },
+      { id: 9, titulo: 'Apartamento com varanda gourmet', tipo: 'Apartamento', cidade: 'Campinas', bairro: 'Cambuí', preco: 640000, area: 88, quartos: 2, banheiros: 2, vagas: 2, foto: img('photo-1545324418-cc1a3fa10c00'), tag: 'Novo' }
+    ];
+
+    // ---------- Utilitários ----------
+    const $ = (s, el = document) => el.querySelector(s);
+    const brl = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    // ---------- Header ----------
+    const header = $('#header');
+    const onScroll = () => {
+      const scrolled = window.scrollY > 40;
+      header.classList.toggle('bg-brand-900/95', scrolled);
+      header.classList.toggle('backdrop-blur', scrolled);
+      header.classList.toggle('shadow-lg', scrolled);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    $('#menu-btn').addEventListener('click', () => $('#mobile-menu').classList.toggle('hidden'));
+    document.querySelectorAll('#mobile-menu a').forEach((a) => a.addEventListener('click', () => $('#mobile-menu').classList.add('hidden')));
+
+    // ---------- Cards ----------
+    function cardHTML(p) {
+      return `
+        <article class="card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow flex flex-col fade-in">
+          <div class="relative h-56 overflow-hidden">
+            <img src="${p.foto}" alt="${esc(p.titulo)}" loading="lazy" onerror="this.onerror=null;this.src='${FALLBACK}'" class="card-img w-full h-full object-cover" />
+            ${p.tag ? `<span class="absolute top-3 left-3 bg-accent-500 text-white text-xs font-bold px-3 py-1 rounded-full">${esc(p.tag)}</span>` : ''}
+            <span class="absolute top-3 right-3 bg-white/90 text-slate-700 text-xs font-semibold px-3 py-1 rounded-full">${esc(p.tipo)}</span>
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <p class="text-2xl font-extrabold text-brand-600">${brl(p.preco)}</p>
+            <h3 class="mt-1 font-semibold text-slate-900">${esc(p.titulo)}</h3>
+            <p class="text-sm text-slate-500">${esc(p.bairro)}, ${esc(p.cidade)}</p>
+            <ul class="mt-4 grid grid-cols-4 gap-2 text-center text-xs text-slate-600 border-t border-slate-100 pt-4">
+              <li><span class="block font-bold text-slate-900 text-sm">${p.area} m²</span>Área</li>
+              <li><span class="block font-bold text-slate-900 text-sm">${p.quartos}</span>Quartos</li>
+              <li><span class="block font-bold text-slate-900 text-sm">${p.banheiros}</span>Banh.</li>
+              <li><span class="block font-bold text-slate-900 text-sm">${p.vagas}</span>Vagas</li>
+            </ul>
+            <button data-id="${p.id}" class="interesse mt-5 w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-lg py-3 transition">Tenho interesse</button>
+          </div>
+        </article>`;
+    }
+
+    // Revelação ao rolar
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    const observeFades = () => document.querySelectorAll('.fade-in:not(.visible)').forEach((el) => io.observe(el));
+
+    function render(list) {
+      $('#grid').innerHTML = list.map(cardHTML).join('');
+      $('#empty').classList.toggle('hidden', list.length > 0);
+      observeFades();
+    }
+
+    // ---------- Busca ----------
+    [...new Set(imoveis.map((p) => p.cidade))].sort().forEach((c) => {
+      $('#s-cidade').insertAdjacentHTML('beforeend', `<option value="${esc(c)}">${esc(c)}</option>`);
+    });
+
+    function filtrar() {
+      const tipo = $('#s-tipo').value, cidade = $('#s-cidade').value;
+      const quartos = +$('#s-quartos').value, preco = +$('#s-preco').value;
+      return imoveis.filter((p) =>
+        (!tipo || p.tipo === tipo) && (!cidade || p.cidade === cidade) &&
+        p.quartos >= quartos && (!preco || p.preco <= preco));
+    }
+
+    $('#search-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      render(filtrar());
+      $('#destaques').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    $('#clear-filters').addEventListener('click', () => {
+      $('#search-form').reset();
+      render(imoveis);
+    });
+
+    // Botão "Tenho interesse" leva ao formulário
+    $('#grid').addEventListener('click', (e) => {
+      const btn = e.target.closest('.interesse');
+      if (!btn) return;
+      const p = imoveis.find((i) => i.id === +btn.dataset.id);
+      $('#form-success').classList.add('hidden');
+      $('#contato').scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => $('#nome').focus({ preventScroll: true }), 600);
+      $('#lead-form').dataset.imovel = p.titulo;
+    });
+
+    // ---------- Formulário de leads ----------
+    const form = $('#lead-form');
+    const tel = $('#telefone');
+
+    tel.addEventListener('input', () => {
+      let d = tel.value.replace(/\D/g, '').slice(0, 11);
+      if (d.length > 6) d = d.length > 10 ? `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}` : `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
+      else if (d.length > 2) d = `(${d.slice(0, 2)}) ${d.slice(2)}`;
+      else if (d.length) d = `(${d}`;
+      tel.value = d;
+    });
+
+    const rules = {
+      nome: (v) => v.trim().length >= 3,
+      email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+      telefone: (v) => { const n = v.replace(/\D/g, ''); return n.length === 10 || n.length === 11; }
+    };
+
+    function validate(input) {
+      const ok = rules[input.name](input.value);
+      input.classList.toggle('border-red-500', !ok);
+      input.classList.toggle('border-slate-300', ok);
+      input.parentElement.querySelector('.err').classList.toggle('hidden', ok);
+      return ok;
+    }
+
+    Object.keys(rules).forEach((n) => form.elements[n].addEventListener('blur', (e) => validate(e.target)));
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const valid = Object.keys(rules).map((n) => validate(form.elements[n])).every(Boolean);
+      if (!valid) return;
+
+      const lead = {
+        nome: form.elements.nome.value.trim(),
+        email: form.elements.email.value.trim(),
+        telefone: form.elements.telefone.value,
+        imovel: form.dataset.imovel || null
+      };
+      // Substitua por fetch('/sua-api', { method: 'POST', body: JSON.stringify(lead) }) em produção
+      console.log('Lead capturado:', lead);
+
+      const msg = $('#form-success');
+      msg.textContent = `Obrigado, ${lead.nome.split(' ')[0]}! Recebemos seus dados e um corretor entrará em contato em breve.`;
+      msg.classList.remove('hidden');
+      form.reset();
+      delete form.dataset.imovel;
+    });
+
+    // ---------- Init ----------
+    $('#year').textContent = new Date().getFullYear();
+    render(imoveis);
+    observeFades();
+  </script>
+</body>
+</html>
